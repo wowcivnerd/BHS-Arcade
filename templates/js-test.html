@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Joystick and Buttons</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('nav a');
+            let selectedIndex = 0;
+
+            function updateSelectedLink() {
+                navLinks.forEach((link, index) => {
+                    if (index === selectedIndex) {
+                        link.classList.add('selected');
+                    } else {
+                        link.classList.remove('selected');
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'n' || event.key === 'N') {
+                    selectedIndex = Math.max(0, selectedIndex - 1);
+                    updateSelectedLink();
+                } else if (event.key === 'm' || event.key === 'M') {
+                    selectedIndex = Math.min(navLinks.length - 1, selectedIndex + 1);
+                    updateSelectedLink();
+                } else if (event.key === 'a' || event.key === 'A') {
+                    navLinks[selectedIndex].click();
+                } 
+            });
+
+            updateSelectedLink();
+        });
+    </script>
+    <style>
+        nav a { margin-right: 10px; text-decoration: none; }
+        .selected { background-color: yellow; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/page1" >Page 1</a>
+        <a href="/page2" >Page 2</a>
+        <a href="/page3" >Page 3</a>
+    </nav>
+</body>
+</html>

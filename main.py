@@ -5,6 +5,10 @@ import os
 app = Flask(__name__)
 
 
+@app.route("/test")
+def test():
+    return render_template("js-test.html")
+
 @app.route("/")
 def index():
     # games_folder = os.path.join('static', 'games')
@@ -12,10 +16,13 @@ def index():
     # game_name = 
     # game_location = 
 
-        games_folder = os.path.join('static', 'games')
-        game_files = [os.path.join(games_folder, file) for file in os.listdir(games_folder)]
-        return render_template('index.html', game_files=game_files)
+        # games_folder = os.path.join('static', 'games')
+        # game_files = [os.path.join(games_folder, file) for file in os.listdir(games_folder)]
+        # return render_template('index.html', game_files=game_files)
 
+    games_folder = os.path.join('static', 'games')
+    game_files = [(os.path.join(games_folder, file), os.path.basename(file)) for file in os.listdir(games_folder)]
+    return render_template('index.html', game_files=game_files)
 
     
 
